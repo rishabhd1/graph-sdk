@@ -1,28 +1,27 @@
-import Chart from 'chart.js/auto';
-import { ChartTypes } from '../models/ChartHandler';
+import Chart, { ChartData, ChartTypeRegistry } from 'chart.js/auto';
 
 export class ChartHandler {
-    type: ChartTypes;
-    data: any;
+    element: string;
+    type: keyof ChartTypeRegistry;
+    data: ChartData;
+    chart: Chart;
 
-    constructor(type: ChartTypes, data: any) {
+    constructor(
+        element: string,
+        type: keyof ChartTypeRegistry,
+        data: ChartData
+    ) {
+        this.element = element;
         this.type = type;
         this.data = data;
     }
 
     render() {
-        new Chart(this.type, {
-            type: 'bar',
-            data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                datasets: [
-                    {
-                        label: '# of Votes',
-                        data: [12, 19, 3, 5, 2, 3],
-                        borderWidth: 1,
-                    },
-                ],
-            },
+        console.log(this.data);
+
+        this.chart = new Chart(this.element, {
+            type: this.type,
+            data: this.data,
             options: {
                 scales: {
                     y: {
@@ -31,5 +30,14 @@ export class ChartHandler {
                 },
             },
         });
+    }
+
+    update(data: ChartData) {
+        this.data = data;
+
+        this.chart.data.labels = data.labels;
+        this.chart.data.datasets = data.datasets;
+
+        this.chart.update();
     }
 }
