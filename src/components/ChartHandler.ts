@@ -6,18 +6,13 @@ export class ChartHandler {
     data: ChartData;
     chart: Chart;
 
-    constructor(
-        element: string,
-        type: keyof ChartTypeRegistry,
-        data: ChartData
-    ) {
+    constructor(element: string) {
         this.element = element;
-        this.type = type;
-        this.data = data;
     }
 
-    render() {
-        console.log(this.data);
+    render(type: keyof ChartTypeRegistry, data: ChartData) {
+        this.type = type;
+        this.data = data;
 
         this.chart = new Chart(this.element, {
             type: this.type,
