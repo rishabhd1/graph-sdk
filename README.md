@@ -1,4 +1,4 @@
-# dth
+# Graph SDK
 
 ## Project setup
 
