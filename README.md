@@ -15,7 +15,7 @@ npm run build
 ```
 
 Inside dist create index.html and put the following code inside to test
-```
+```html
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,8 +38,8 @@ Inside dist create index.html and put the following code inside to test
             ],
         };
 
-        const chart = new ChartHandler('chart-sdk', 'bar', initialData);
-        chart.render();
+        const chart = new ChartHandler('chart-sdk');
+        chart.render('bar', initialData);
 
         function updateChart() {
             const updatedData = {
